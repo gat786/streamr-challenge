@@ -14,6 +14,9 @@ export default function ProductsList() {
         "Content-Type": "application/json",
         authorization: "",
       },
+      params: {
+        publicAccess: true,
+      },
     });
   };
 
