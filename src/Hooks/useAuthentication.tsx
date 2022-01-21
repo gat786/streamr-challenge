@@ -7,6 +7,7 @@ export default function useAuthentication(): {
   provider: ethers.providers.Web3Provider;
   signer: ethers.providers.JsonRpcSigner;
   authenticate: () => void;
+  logout: () => void;
   isAuthenticated: boolean;
 } {
   if ((window as any).ethereum) {
@@ -52,16 +53,35 @@ export default function useAuthentication(): {
 
     localStorage.setItem("expires", expires);
     localStorage.setItem("token", token);
+    checkStatus();
+  };
+
+  const logout = () => {
+    localStorage.removeItem("expires");
+    localStorage.removeItem("token");
+    checkStatus();
   };
 
   useEffect(() => {
+    checkStatus();
+  }, []);
+
+  const checkStatus = () => {
     const expires = localStorage.getItem("expires");
     const token = localStorage.getItem("token");
 
     if (expires && new Date(expires) > new Date()) {
       setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
     }
-  });
+  };
 
-  return { provider, signer, authenticate, isAuthenticated: authenticated };
+  return {
+    provider,
+    signer,
+    authenticate,
+    isAuthenticated: authenticated,
+    logout,
+  };
 }
