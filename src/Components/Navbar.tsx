@@ -3,18 +3,28 @@ import useAuthentication from "../Hooks/useAuthentication";
 
 export default function Navbar() {
   const { authenticate, isAuthenticated, logout } = useAuthentication();
-
-  useEffect(() => {
-    console.log({ isAuthenticated });
-  }, [isAuthenticated]);
+  
   return (
-    <div className="flex">
+    <nav className="flex justify-between h-24 items-center pli-8 bg-slate-500 text-zinc-100">
       <h1 className="text-2xl font-semibold">Streamr Products</h1>
-      {!isAuthenticated ? (
-        <button onClick={authenticate}>Authenticate</button>
-      ) : (
-        <button onClick={logout}>Logout</button>
-      )}
-    </div>
+
+      <div>
+        {!isAuthenticated ? (
+          <button
+            className="border border-white px-2 rounded-lg"
+            onClick={authenticate}
+          >
+            Authenticate
+          </button>
+        ) : (
+          <button
+            className="border border-white px-2 rounded-lg"
+            onClick={logout}
+          >
+            Logout
+          </button>
+        )}
+      </div>
+    </nav>
   );
 }

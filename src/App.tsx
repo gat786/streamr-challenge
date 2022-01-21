@@ -7,12 +7,15 @@ import axios from "axios";
 import config from "./config";
 import Navbar from "./Components/Navbar";
 import useAuthentication from "./Hooks/useAuthentication";
+import ProductsList from "./Components/ProductsList";
 
 function App() {
+  const { isAuthenticated } = useAuthentication();
 
   return (
     <div className="App">
       <Navbar />
+      {isAuthenticated && <ProductsList />}
     </div>
   );
 }

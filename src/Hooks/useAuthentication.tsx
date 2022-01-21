@@ -3,13 +3,17 @@ import axios from "axios";
 import config from "../config";
 import { useEffect, useState } from "react";
 
-export default function useAuthentication(): {
+interface UseAuthenticationResponse {
   provider: ethers.providers.Web3Provider;
   signer: ethers.providers.JsonRpcSigner;
   authenticate: () => void;
   logout: () => void;
   isAuthenticated: boolean;
-} {
+  expires: string | null;
+  token: string | null;
+}
+
+export default function useAuthentication(): UseAuthenticationResponse {
   if ((window as any).ethereum) {
     if (!(window as any).ethereum?.enabled) {
       (window as any).ethereum.enable();
@@ -22,6 +26,9 @@ export default function useAuthentication(): {
     new ethers.providers.Web3Provider((window as any).ethereum);
   let signer: ethers.providers.JsonRpcSigner = provider.getSigner();
   let [authenticated, setAuthenticated] = useState<boolean>(false);
+
+  let expires = localStorage.getItem("expires");
+  let token = localStorage.getItem("token");
 
   const authenticate = async () => {
     // const address = await signer.signMessage("Hello World");
@@ -67,9 +74,8 @@ export default function useAuthentication(): {
   }, []);
 
   const checkStatus = () => {
-    const expires = localStorage.getItem("expires");
-    const token = localStorage.getItem("token");
-
+    expires = localStorage.getItem("expires");
+    token = localStorage.getItem("token");
     if (expires && new Date(expires) > new Date()) {
       setAuthenticated(true);
     } else {
@@ -83,5 +89,7 @@ export default function useAuthentication(): {
     authenticate,
     isAuthenticated: authenticated,
     logout,
+    expires,
+    token,
   };
 }
