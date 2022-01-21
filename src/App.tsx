@@ -9,16 +9,10 @@ import Navbar from "./Components/Navbar";
 import useAuthentication from "./Hooks/useAuthentication";
 
 function App() {
-  const { authenticate, isAuthenticated } = useAuthentication();
-
-  useEffect(() => {
-    console.log({ isAuthenticated });
-  }, [isAuthenticated]);
 
   return (
     <div className="App">
       <Navbar />
-      <button onClick={authenticate}>Login</button>
     </div>
   );
 }
