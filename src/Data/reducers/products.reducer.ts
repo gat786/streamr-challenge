@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Product } from "data/model/Product";
+import { Product } from "Data/model/Product";
 
 const productSlice = createSlice({
   name: "demoSlice",
