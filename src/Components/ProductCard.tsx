@@ -18,10 +18,21 @@ export default function ProductCard(props: { product: Product }) {
     <div className={styles.productCard}>
       <img
         className="h-56 w-full object-cover"
-        src={props?.product?.imageUrl} alt="" />
-      <h3 className="text-xl font-semibold whitespace-nowrap overflow-ellipsis overflow-hidden pli-4 plb-4">
-        {props?.product?.name}
-      </h3>
+        src={props?.product?.imageUrl}
+        alt=""
+      />
+      <div className=" pli-4 ">
+        <h3 className="text-xl font-semibold whitespace-nowrap overflow-ellipsis overflow-hidden plb-2">
+          {props?.product?.name}
+        </h3>
+        {props?.product?.pricePerSecond == 0 ? (
+          <p>Free</p>
+        ) : (
+          <p>
+            {props.product?.pricePerSecond} {props?.product?.priceCurrency}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

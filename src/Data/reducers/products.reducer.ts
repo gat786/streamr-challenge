@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { ProductFilters } from "App";
 import config from "config";
 import { Product } from "Data/model/Product";
 import { getProductsService } from "Data/services/products.service";
 
 export const getProducts = createAsyncThunk(
   "ProductSlice",
-  async (payload, thunkApi) => {
+  async (payload: ProductFilters, thunkApi) => {
     try {
       const response = await getProductsService({
-        params: { publicAccess: true, max: config.pageSize },
+        params: { publicAccess: true, max: config.pageSize, ...payload },
       });
       if (response.isSuccessful) {
         return response.data;
@@ -28,6 +29,7 @@ const productSlice = createSlice({
   extraReducers: {
     [getProducts.fulfilled.type]: (state, action) => {
       const products = action?.payload as Product[];
+      state.products = {};
       products.forEach((product) => {
         state.products[product.id] = product;
       });
