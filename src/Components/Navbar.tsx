@@ -12,7 +12,7 @@ export default function Navbar() {
       <div>
         {!isAuthenticated ? (
           <button
-            className="border border-white px-2 rounded-lg"
+            className="border border-white  px-4 plb-2 rounded-lg text-base"
             onClick={authenticate}
           >
             Authenticate
@@ -21,7 +21,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <p>{accountAddress?.toString()}</p>
             <button
-              className="bg-black text-white px-2 rounded-lg"
+              className="bg-black text-white px-4 plb-2 rounded-lg text-lg"
               onClick={logout}
             >
               Logout

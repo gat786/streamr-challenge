@@ -24,7 +24,8 @@ const categorySlice = createSlice({
   reducers: {},
   extraReducers: {
     [getCategories.fulfilled.type]: (state, action) => {
-      console.log(action);
+      const categories = action?.payload as Category[];
+      state.categories = categories;
     },
   },
 });

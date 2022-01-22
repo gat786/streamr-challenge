@@ -78,7 +78,9 @@ export default function useAuthentication(): UseAuthenticationResponse {
     checkStatus();
   }, []);
 
-  const checkStatus = () => {
+  const checkStatus = async () => {
+    const address = await signer.getAddress();
+    setAccountAddress((current) => address);
     expires = localStorage.getItem("expires");
     token = localStorage.getItem("token");
     if (expires && new Date(expires) > new Date()) {
