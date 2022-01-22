@@ -34,12 +34,21 @@ function App() {
       <Navbar />
       <div className="plb-4 flex gap-4 items-center w-full md:w-11/12">
         Filters
-        <select name="" id="" className="bg-transparent p-2 border text-base">
-          <option value="" selected hidden>
+        <select
+          name=""
+          defaultValue=""
+          id=""
+          className="bg-transparent p-2 border text-base"
+        >
+          <option value="" hidden>
             Select a Category
           </option>
           {categories.map((category) => {
-            return <option value={category.id}>{category.name}</option>;
+            return (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            );
           })}
         </select>
       </div>

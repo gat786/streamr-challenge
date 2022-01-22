@@ -5,6 +5,7 @@ import config from "../config";
 
 import useAuthentication from "Hooks/useAuthentication";
 
+import * as productActions from "Data/reducers/products.reducer";
 
 export default function ProductsList() {
   const [products, setProducts] = useState<any[]>();
@@ -13,6 +14,9 @@ export default function ProductsList() {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(productActions.getProducts());
+  }, []);
 
   return <div></div>;
 }
