@@ -7,16 +7,12 @@ import useAuthentication from "Hooks/useAuthentication";
 
 import * as productActions from "Data/reducers/products.reducer";
 
-export default function ProductsList() {
-  const [products, setProducts] = useState<any[]>();
+import { Product } from "Data/model/Product";
 
-  const { token, expires } = useAuthentication();
+import styles from "Components/components.module.css";
 
+export default function ProductCard(props: { product: Product }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(productActions.getProducts());
-  }, []);
-
-  return <div></div>;
+  return <div className={styles.productCard}>{props?.product?.name}</div>;
 }

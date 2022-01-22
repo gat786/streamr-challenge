@@ -1,0 +1,3 @@
+.productCard{
+    @apply h-80 w-80 bg-white shadow-md hover:shadow-lg;
+}

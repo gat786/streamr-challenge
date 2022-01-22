@@ -7,11 +7,12 @@ import "./App.css";
 import logo from "./logo.svg";
 
 import Navbar from "./Components/Navbar";
-import ProductsList from "./Components/ProductsList";
+import ProductCard from "./Components/ProductCard";
 
 import useAuthentication from "./Hooks/useAuthentication";
 
 import * as categoryActions from "Data/reducers/categories.reducer";
+import * as productActions from "Data/reducers/products.reducer";
 
 import config from "./config";
 import { RootState } from "Data/reducers";
@@ -23,10 +24,15 @@ function App() {
 
   useEffect(() => {
     dispatch(categoryActions.getCategories());
+    dispatch(productActions.getProducts());
   }, []);
 
   const categories = useSelector(
     (root: RootState) => root.categoryReducer.categories
+  );
+
+  const products = useSelector(
+    (root: RootState) => root.productReducer.products
   );
 
   return (
@@ -52,7 +58,12 @@ function App() {
           })}
         </select>
       </div>
-      <ProductsList />
+
+      <div className="flex flex-wrap gap-8 w-full md:w-11/12 justify-center">
+        {Object.entries(products).map(([key, product]) => {
+          return <ProductCard product={product} />;
+        })}
+      </div>
     </div>
   );
 }

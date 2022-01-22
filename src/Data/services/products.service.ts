@@ -1,9 +1,14 @@
 import config from "config";
 import { get } from "./services.common";
 
-const getProductsService = async () => {
+interface GetProductsParams {
+  publicAccess: boolean;
+  max: number;
+}
+
+const getProductsService = async (args: { params: GetProductsParams }) => {
   const url = config.API_BASE + "products";
-  return await get({ url, params: { publicAccess: true } });
+  return await get({ url, params: args.params });
 };
 
 export { getProductsService };
