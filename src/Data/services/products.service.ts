@@ -1,0 +1,5 @@
+
+
+const getProducts = () => {};
+
+export { getProducts };
