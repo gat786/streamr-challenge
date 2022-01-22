@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import config from "../config";
 
 import useAuthentication from "Hooks/useAuthentication";
-import * as categoryActions from "Data/reducers/categories.reducer";
+
 
 export default function ProductsList() {
   const [products, setProducts] = useState<any[]>();
@@ -13,9 +13,6 @@ export default function ProductsList() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(categoryActions.getCategories());
-  }, []);
 
   return <div></div>;
 }
