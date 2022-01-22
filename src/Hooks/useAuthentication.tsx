@@ -11,6 +11,7 @@ interface UseAuthenticationResponse {
   isAuthenticated: boolean;
   expires: string | null;
   token: string | null;
+  accountAddress: string | null;
 }
 
 export default function useAuthentication(): UseAuthenticationResponse {
@@ -24,8 +25,11 @@ export default function useAuthentication(): UseAuthenticationResponse {
 
   let provider: ethers.providers.Web3Provider =
     new ethers.providers.Web3Provider((window as any).ethereum);
+
   let signer: ethers.providers.JsonRpcSigner = provider.getSigner();
-  let [authenticated, setAuthenticated] = useState<boolean>(false);
+
+  const [authenticated, setAuthenticated] = useState<boolean>(false);
+  const [accountAddress, setAccountAddress] = useState<string>("");
 
   let expires = localStorage.getItem("expires");
   let token = localStorage.getItem("token");
@@ -33,6 +37,7 @@ export default function useAuthentication(): UseAuthenticationResponse {
   const authenticate = async () => {
     // const address = await signer.signMessage("Hello World");
     const address = await signer?.getAddress();
+    setAccountAddress((current) => address);
 
     const response = await axios.post(
       config.API_BASE + `login/challenge/${address}`
@@ -48,7 +53,7 @@ export default function useAuthentication(): UseAuthenticationResponse {
         challenge,
       },
       signature: signedData,
-      address,
+      address: address,
     };
 
     const authData = await axios.post(
@@ -91,5 +96,6 @@ export default function useAuthentication(): UseAuthenticationResponse {
     logout,
     expires,
     token,
+    accountAddress,
   };
 }
