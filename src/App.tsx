@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="plb-4 flex gap-4 items-center w-full md:w-11/12">
+      <div className="plb-4 flex gap-4 items-center w-full pli-8 md:w-11/12 md:pli-0">
         Filters
         <select
           name=""
@@ -59,7 +59,7 @@ function App() {
         </select>
       </div>
 
-      <div className="flex flex-wrap gap-8 w-full md:w-11/12 justify-center">
+      <div className="flex flex-wrap gap-8 w-full md:w-11/12 justify-center mbe-12">
         {Object.entries(products).map(([key, product]) => {
           return <ProductCard product={product} />;
         })}

@@ -1,6 +1,6 @@
 const config = {
   API_BASE: "https://streamr.network/api/v1/",
-  pageSize: 25,
+  pageSize: 24,
 };
 
 export default config;

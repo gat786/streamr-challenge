@@ -14,5 +14,14 @@ import styles from "Components/components.module.css";
 export default function ProductCard(props: { product: Product }) {
   const dispatch = useDispatch();
 
-  return <div className={styles.productCard}>{props?.product?.name}</div>;
+  return (
+    <div className={styles.productCard}>
+      <img
+        className="h-56 w-full object-cover"
+        src={props?.product?.imageUrl} alt="" />
+      <h3 className="text-xl font-semibold whitespace-nowrap overflow-ellipsis overflow-hidden pli-4 plb-4">
+        {props?.product?.name}
+      </h3>
+    </div>
+  );
 }
